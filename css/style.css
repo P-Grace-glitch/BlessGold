@@ -9,6 +9,16 @@
   scroll-padding-top: 2em;
   scroll-behavior: smooth;
 }
+/* Custom scroll Bar*/
+::-webkit-scrollbar{
+  width: 0.5rem;
+  background: purple;
+}
+::-webkit-scrollbar-thumb{
+  width: 0.5rem;
+  background: paleturquoise;
+  border-radius: 5rem;
+}
 section {
   padding: 4.5rem 0 1.5rem;
 }
@@ -107,7 +117,7 @@ header {
   width: 400px;
   position: absolute;
   bottom: 0px;
-  right: 400px;
+  right: 200px;
 }
 .container .home-test {
   padding: 0px 150px;
@@ -191,10 +201,11 @@ header {
   margin-right: auto;
 }
 .categories-conatiner {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(3, 300px);
   align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
+  justify-content: center;
+  gap: 2rem;
   margin-top: 2rem;
 }
 .categories-conatiner .box {
@@ -469,4 +480,116 @@ header {
 }
 .footer-box .bxs-envelope {
   color: #660066;
+}
+
+/* Making Responsive */
+@media (max-width: 1080px){
+  header{
+    padding: 18px 60px;
+  }
+  .home-text{
+    padding: 0 100px;
+  }
+  .container img{
+    right: 100px;
+  }
+}
+
+@media (max-width: 991px){
+  header{
+    padding: 18px 4%;
+  }
+  section{
+    padding: 50px 4%;
+  }
+  .home-text h1{
+    font-size: 2rem;
+  }
+  .categories-conatiner {
+    grid-template-columns: repeat(2, 260px);
+   }
+   .box3{
+    margin-top: 2rem;
+}
+
+@media (max-width: 852px){
+  header{
+    padding: 12px 4%;
+  }
+  #menu-icon{
+    display: block;
+  }
+  .navbar{
+    position: absolute;
+    top: -570px;
+    left: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    background: whitesmoke;
+    box-shadow: 4px 4px 0 4px rgb(14, 55, 54 / 15%);
+    transition: 0.2s all linear
+  }
+   .navbar a{
+    padding: 1rem;
+    margin: 1rem;
+    display: block;
+   }
+  .container img{
+  width: 300px;
+  position: absolute;
+  bottom: 0px;
+  right: -20px;
+  }
+  .home-test{
+    position: relative;
+    left: 100rem;
+  }
+  .home-test span{
+    font-size: 1rem;
+    position: absolute;
+    left: -2rem;
+    top: -1rem;
+  }
+  .home-test h1 {
+    font-size: 1.7rem;
+    font-weight: 650;
+    margin-bottom: 1rem;
+    position: absolute;
+    left: -2rem;
+  }
+  .home-test .btn{
+    position: absolute;
+    left: -2rem;
+    top: 4rem;
+  }
+   .navbar a:hover,.navbar .home-active{
+    border-radius: 00.5rem;
+    color: navajowhite;
+   }
+   .navbar.active{
+    top: 100%;
+   }
+   .categories-conatiner {
+    grid-template-columns: repeat(2, 250px);
+    grid: 0.5rem;
+   }
+   .box3{
+    margin-top: 0rem;
+   }
+   .back-img{
+    width: 340%;
+   }
+}
+@media (max-width: 712px){
+  .categories-conatiner {
+    grid-template-columns: repeat(1, 350px);
+    grid: 0.5rem;
+   }
+   .box3{
+    margin-top: 0rem;
+   }
+   .back-img{
+    width: 340%;
+   }
 }
