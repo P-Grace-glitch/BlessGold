@@ -12,9 +12,9 @@ let generateShop = () =>{
                 <img width="220" src="${img}" alt="">
                 <div class="details">
                     <h3>${name}</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing.</p>
+                    <p>Bless Gold Hair</p>
                     <div class="price-quantity">
-                        <h2>N${price}</h2>
+                        <h2><span>&#8358;</span> ${price}</h2>
                         <div class="button">
                         <i onclick="decrement(${id})" class='bx bx-minus'></i>
                         <div id=${id} class="quantity">
