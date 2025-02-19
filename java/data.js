@@ -3,63 +3,63 @@ let shopItemsData = [
         id: "hfebudbjn",
         name:"Human hair 3 bundles & closure",
         price: 15000,
-        desc:"Lorem ipsum dolor sit amet consectetur adipisicing.",
+        desc:"Bless Gold Hair",
         img:"img/fbb.jpeg"
     },
     {
         id: "jgufygbn",
         name:"16' Human hair",
         price: 40000,
-        desc:"Lorem ipsum dolor sit amet consectetur adipisicing.",
+        desc:"Bless Gold Hair",
         img:"img/aab.jpeg"
     },
     {
         id: "oiuhgy",
         name:"SDD Bone Straight",
         price: 120000,
-        desc:"Lorem ipsum dolor sit amet consectetur adipisicing.",
+        desc:"Bless Gold Hair",
         img:"img/art.jpeg"
     },
     {
         id: "okjhn",
         name:"Omotola closure Bounce",
         price: 35000,
-        desc:"Lorem ipsum dolor sit amet consectetur adipisicing.",
+        desc:"Bless Gold Hair",
         img:"img/bhh.jpeg"
     },
     {
         id: "okjhjnb",
         name:"Donor Bone straight",
         price: 80000,
-        desc:"Lorem ipsum dolor sit amet consectetur adipisicing.",
+        desc:"Bless Gold Hair",
         img:"img/donorbonestraight80k.jpeg"
     },
     {
         id: "iuhnhb",
         name:"Double drawn deep",
         price: 45000,
-        desc:"Lorem ipsum dolor sit amet consectetur adipisicing.",
+        desc:"Bless Gold Hair",
         img:"img/doubledrawndeep45k.jpeg"
     },
     {
         id: "oxxxcoij",
         name:"Double Drawn",
         price: 38000,
-        desc:"Lorem ipsum dolor sit amet consectetur adipisicing.",
+        desc:"Bless Gold Hair",
         img:"img/doubledrawn38k.jpeg"
     },
     {
         id: "vfdcvdc",
         name:"Human hair Bob",
         price: 18000,
-        desc:"Lorem ipsum dolor sit amet consectetur adipisicing.",
+        desc:"Bless Gold Hair",
         img:"img/ffgd.jpeg"
     },
     {
         id: "vhyjhvb",
         name:"Budget Curls",
         price: 22000,
-        desc:"Lorem ipsum dolor sit amet consectetur adipisicing.",
+        desc:"Bless Gold Hair",
         img:"img/fgr.jpeg"
     },
     {
@@ -175,13 +175,6 @@ let shopItemsData = [
         img:"img/tiy.jpeg"
     },
     {
-        id: "bvss",
-        name:"Bob Wig",
-        price: 20,
-        desc:"Lorem ipsum dolor sit amet consectetur adipisicing.",
-        img:"img/tjhgf.jpeg"
-    },
-    {
         id: "kjhv",
         name:"SDD Bone Straight",
         price: 120000,
@@ -292,6 +285,27 @@ let shopItemsData = [
         price: 45000,
         desc:"Lorem ipsum dolor sit amet consectetur adipisicing.",
         img:"img/aaaf.jpeg"
+    },
+    {
+        id: "fbdfnn",
+        name:"24' Eurasian Curls",
+        price: 50000,
+        desc:"Lorem ipsum dolor sit amet consectetur adipisicing.",
+        img:"img/24Eurasiancurls50k.jpeg"
+    },
+    {
+        id: "bluulg",
+        name:"Single Drawn Jerry Curls 16'",
+        price: 55000,
+        desc:"Lorem ipsum dolor sit amet consectetur adipisicing.",
+        img:"img/singledrawnjerrycurls16'55k18'60k.jpeg"
+    },
+    {
+        id: "bluyytg",
+        name:"Single Drawn Jerry Curls 18'",
+        price: 60000,
+        desc:"Lorem ipsum dolor sit amet consectetur adipisicing.",
+        img:"img/singledrawnjerrycurls16'55k18'60k.jpeg"
     },
 
 ];
