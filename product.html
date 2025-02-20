@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Products</title>
+  <style>
+    /* Add some basic styling to make the data look nicer */
+    .product {
+      border: 1px solid #ddd;
+      padding: 10px;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Products</h1>
+  <div id="products-container"></div>
+  <script>
+    const productsContainer = document.getElementById('products-container');
+    const productsData = JSON.parse(localStorage.getItem('products')) || [];
+    let editingIndex = null;
+
+    const generateProducts = () => {
+      if (Array.isArray(productsData)) {
+        productsContainer.innerHTML = '';
+        productsData.forEach((product, index) => {
+          const productHTML = `
+            <div class="product">
+              <h2>
+                <input type="text" id="name-${index}" value="${product.name}" ${editingIndex === index ? '' : 'disabled'}>
+              </h2>
+              <p>
+                <textarea id="description-${index}" ${editingIndex === index ? '' : 'disabled'}>${product.description}</textarea>
+              </p>
+              <p>
+                Price: 
+                <input type="number" id="price-${index}" value="${product.price}" ${editingIndex === index ? '' : 'disabled'}>
+              </p>
+              <img width="220" src="${product.image}" alt="${product.name}" id="image-${index}">
+              <input type="file" id="file-${index}" style="display: none;">
+              <button class="edit-image-button" onclick="editImage(${index})" ${editingIndex === index ? '' : 'disabled'}>Edit Image</button>
+              <button class="cancel-button" onclick="deleteProduct(${index})">Cancel</button>
+              <button class="edit-button" onclick="editProduct(${index})" style="${editingIndex === index ? 'display: none;' : ''}">Edit</button>
+              <button class="save-button" onclick="saveProduct(${index})" style="${editingIndex === index ? '' : 'display: none;'}">Save</button>
+            </div>
+          `;
+          productsContainer.innerHTML += productHTML;
+        });
+      } else {
+        console.error('Products data is not an array:', productsData);
+      }
+    };
+
+    const deleteProduct = (index) => {
+      productsData.splice(index, 1);
+      localStorage.setItem('products', JSON.stringify(productsData));
+      generateProducts();
+    };
+
+    const editProduct = (index) => {
+      editingIndex = index;
+      generateProducts();
+    };
+
+    const saveProduct = (index) => {
+      const name = document.getElementById(`name-${index}`).value;
+      const description = document.getElementById(`description-${index}`).value;
+      const price = document.getElementById(`price-${index}`).value;
+      const image = document.getElementById(`image-${index}`).src;
+      productsData[index] = { name, description, price, image };
+      localStorage.setItem('products', JSON.stringify(productsData));
+      editingIndex = null;
+      generateProducts();
+    };
+
+    const editImage = (index) => {
+      const fileInput = document.getElementById(`file-${index}`);
+      fileInput.click();
+      fileInput.addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        const reader = new FileReader();
+        reader.onload = () => {
+          const imageData = reader.result;
+          document.getElementById(`image-${index}`).src = imageData;
+        };
+        reader.readAsDataURL(file);
+      });
+    };
+
+    generateProducts();
+  </script>
+</body>
+</html>
