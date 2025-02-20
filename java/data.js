@@ -140,13 +140,6 @@ let shopItemsData = [
         img:"img/qualityblendhair20k.jpeg"
     },
     {
-        id: "ghhj",
-        name:"quality blend hair",
-        price: 20000,
-        desc:"Lorem ipsum dolor sit amet consectetur adipisicing.",
-        img:"img/qualityblendhair20k.jpeg"
-    },
-    {
         id: "iuhg",
         name:"Budget human frontal straight",
         price: 45000,
