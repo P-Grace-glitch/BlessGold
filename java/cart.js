@@ -1,63 +1,63 @@
-
 let label = document.getElementById('label');
 let Shoppingcart = document.getElementById('shopping-cart');
 let basket = JSON.parse(localStorage.getItem("Data")) || [];
-let productsData = JSON.parse(localStorage.getItem('products')) || [];
+let productsData = [];
 
-let calculation = () => {
-  let cartIcon = document.getElementById("cartAmount")
-  cartIcon.innerHTML = basket.map((x) => x.item).reduce((x, y) => x + y, 0)
-}
-calculation();
+const fetchProducts = async () => {
+  try {
+    const response = await fetch('/products');
+    productsData = await response.json();
+    generateCartItems();
+    TotalAmount(); 
+  } catch (error) {
+    console.error('Error fetching products:', error);
+  }
+};
 
+fetchProducts();
 
 let generateCartItems = () => {
   if (basket.length !== 0) {
     return (Shoppingcart.innerHTML = basket.map((x) => {
       let { name, item } = x;
       let search = productsData.find((y) => y.name === name) || [];
-      return `
+      return ` 
         <div class="cart-item">
-          <img width="120" src="${search.image}" alt="" />
+          <img width="120" src="/uploads/${search.image}" alt="" /> 
           <div class="details">
             <div class="title-price-x">
-              <h4 class="title-price">
-                <p>${search.name}</p>
-                <p class="cart-item-price"><span>&#8358;</span>${search.price}</p>
-              </h4>
-              <i onclick="removeItem('${name}')" class='bx bx-x' ></i>
+              <h4 class="title-price"> 
+                <p>${search.name}</p> 
+                <p class="cart-item-price"><span>&#8358;</span>${search.price}</p> 
+              </h4> 
+              <i onclick="removeItem('${name}')" class='bx bx-x' ></i> 
             </div>
-            <div class="button">
+            <div class="button"> 
               <i onclick="decrement('${name}')" class='bx bx-minus'></i>
               <div id=${name} class="quantity">${item}</div>
               <i onclick="increment('${name}')" class='bx bx-plus'></i>
-            </div>
-            <h3><span>&#8358;</span>${item * search.price}</h3>
+            </div> 
+            <h3><span>&#8358;</span>${item * search.price}</h3> 
           </div>
-        </div>
+        </div> 
       `;
     }).join(""));
   } else {
     Shoppingcart.innerHTML = ''
-    label.innerHTML = `
-      <h2>Cart is Empty</h2>
-      <a href="shopcart.html">
-        <button class="HomeBtn">Back to Shop</button>
-      </a>
+    label.innerHTML = ` 
+      <h2>Cart is Empty</h2> 
+      <a href="shopcart.html"> 
+        <button class="HomeBtn">Back to Shop</button> 
+      </a> 
     `;
   }
 };
-
-generateCartItems();
 
 let increment = (name) => {
   let selectedItem = name;
   let search = basket.find((x) => x.name === selectedItem);
   if (search === undefined) {
-    basket.push({
-      name: selectedItem,
-      item: 1,
-    })
+    basket.push({ name: selectedItem, item: 1, })
   } else {
     search.item += 1;
   }
@@ -80,14 +80,20 @@ let decrement = (name) => {
   localStorage.setItem("Data", JSON.stringify(basket));
 };
 
-
 let update = (name) => {
   let search = basket.find((x) => x.name === name);
-  document.getElementById(name).innerHTML = search.item;
+  let quantityElement = document.getElementById(name);
+  if (quantityElement) {
+    quantityElement.innerHTML = search.item;
+  }
   calculation();
   TotalAmount();
 };
 
+let calculation = () => {
+  let cartIcon = document.getElementById("cartAmount")
+  cartIcon.innerHTML = basket.map((x) => x.item).reduce((x, y) => x + y, 0)
+}
 
 let removeItem = (name) => {
   let selectedItem = name;
@@ -98,8 +104,8 @@ let removeItem = (name) => {
   localStorage.setItem("Data", JSON.stringify(basket));
 };
 
-let clearCart = () => { 
-  basket = [] 
+let clearCart = () => {
+  basket = []
   generateCartItems();
   calculation();
   localStorage.setItem("Data", JSON.stringify(basket));
@@ -107,13 +113,13 @@ let clearCart = () => {
 }
 
 
+
 let TotalAmount = () => {
   if (basket.length !== 0) {
-    let amount = basket.map((x) => {
-      let { item, name } = x;
-      let search = productsData.find((y) => y.name === name) || [];
-      return item * search.price;
-    }).reduce((x, y) => x + y, 0);
+    let amount = basket.reduce((acc, current) => {
+      let search = productsData.find((y) => y.name === current.name) || [];
+      return acc + current.item * search.price;
+    }, 0);
     let products = basket.map((x) => {
       let { item, name } = x;
       let search = productsData.find((y) => y.name === name) || [];
@@ -126,8 +132,23 @@ let TotalAmount = () => {
       <a href="index.html"><button class="checkout">Check Out</button></a>
       <button onclick="clearCart()" class="removeAll">Clear Cart</button>
     `;
-  } else return;
+  } else {
+    label.innerHTML = `
+      <h2>Your cart is empty</h2>
+    `;
+  }
 };
-TotalAmount();
+
+window.addEventListener("load", TotalAmount);
+
+function addToCart(item) {
+  // ... add item to cart ...
+  TotalAmount();
+}
+
+function removeFromCart(item) {
+  // ... remove item from cart ...
+  TotalAmount();
+}
 
 
