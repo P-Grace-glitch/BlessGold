@@ -3,33 +3,39 @@ let shopContainer = document.getElementById("shop")
 let basket = JSON.parse(localStorage.getItem("Data")) || [];
 const productsData = JSON.parse(localStorage.getItem('products')) || [];
 
-const generateShop = () => {
-  console.log('productsData:', productsData);
-  return shopContainer.innerHTML = productsData.map((x) => {
-    let { name, price, description, image } = x;
-    console.log('image:', image);
-    let search = basket.find((x) => x.name === name) || [];
-    return ` 
-      <div id="product-id-${name}" class="item"> 
-        <img width="220" src="${image}" alt="${name}"> 
-        <div class="details"> 
-          <h3>${name}</h3> 
-          <p>${description}</p> 
-          <div class="price-quantity"> 
-            <h2><span>&#8358</span> ${price}</h2> 
-            <div class="button"> 
-              <i class='bx bx-minus' onclick="decrement('${name}')"></i> 
-              <div id=${name} class="quantity" data-product-name="${name}"> 
-                ${search.item === undefined ? 0 : search.item} 
-              </div> 
-              <i class='bx bx-plus' onclick="increment('${name}')"></i> 
-            </div> 
-          </div> 
-        </div> 
-      </div> 
-    `;
-  }).join("");
+const generateShop = async () => {
+  try {
+    const response = await fetch('/products');
+    const productsData = await response.json();
+    console.log('productsData:', productsData);
+    const shopContainer = document.getElementById("shop");
+    shopContainer.innerHTML = productsData.map((x) => {
+      let { name, price, description, image } = x;
+      let search = basket.find((x) => x.name === name) || [];
+      return `
+        <div id="product-id-${name}" class="item">
+          <img width="220" src="/uploads/${image}" alt="${name}">
+          <div class="details">
+            <h3>${name}</h3>
+            <p>${description}</p>
+            <div class="price-quantity">
+              <h2><span>&#8358</span> ${price}</h2>
+              <div class="button">
+                <i class='bx bx-minus' onclick="decrement('${name}')"></i>
+                <div id=${name} class="quantity" data-product-name="${name}"> ${search.item === undefined ? 0 : search.item} </div>
+                <i class='bx bx-plus' onclick="increment('${name}')"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    }).join("");
+  } catch (error) {
+    console.error('Error fetching products:', error);
+  }
 };
+
+generateShop();
 
 const updateQuantity = () => {
   productsData.forEach((product) => {
